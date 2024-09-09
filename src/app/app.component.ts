@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import {RouterLink, RouterOutlet} from '@angular/router';
-import {Employee} from "../models/person.model";
 
 @Component({
   selector: 'app-root',

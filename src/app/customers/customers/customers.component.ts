@@ -1,26 +1,41 @@
-import { Component } from '@angular/core';
+import {Component, computed, effect, untracked} from '@angular/core';
 import {Customer} from "../../../models/person.model";
-import {NgForOf} from "@angular/common";
 import {CustomerDetailsComponent} from "../customer-details/customer-details.component";
+import {CustomersService} from "../../../services/customers.service";
 
 @Component({
   selector: 'app-customers',
   standalone: true,
   imports: [
-    NgForOf,
     CustomerDetailsComponent
   ],
   templateUrl: './customers.component.html',
-  styleUrl: './customers.component.scss'
+  styleUrl: './customers.component.scss',
 })
 export class CustomersComponent {
 
-  customers: Customer[] = [{
-    name: 'Pippo',
-    surname: 'Baudo',
-    age: 13,
-    fiscalCode: 'BDPP13',
-    itemsBoughtCounter: 5
-  }];
+  customers = computed<Customer[]>(() => this.customersService.customers());
+
+  itemsCounter = computed<number>(() => {
+    const counters = this.customers().map(({itemsBoughtCounter}) => itemsBoughtCounter)
+    return counters.reduce((prev, curr,) => prev + curr, 0);
+  });
+
+  itemsCounterDescription = computed<string>(() => {
+    return this.itemsCounter().toString(10) + ' total items bought'
+  })
+
+  constructor(private customersService: CustomersService) {
+    effect(() => {
+      console.log(this.customers()?.length) // dependency
+      untracked(() => {
+        console.log(this.itemsCounter()); // non-dependency
+      })
+    });
+  }
+
+  addCustomer(): void {
+    this.customersService.addCustomer();
+  }
 
 }

@@ -10,6 +10,7 @@ export interface Employee extends Person{
   itemsSoldCounter: number;
 }
 
+
 export interface Customer extends Person{
   itemsBoughtCounter: number;
 }
