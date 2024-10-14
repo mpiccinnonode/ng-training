@@ -2,6 +2,7 @@ import { Human } from '../models/human.model';
 
 export const HUMANS: Human[] = [
   {
+    id: 1,
     name: 'John Doe',
     age: 30,
     occupation: 'Software Engineer',
@@ -13,6 +14,7 @@ export const HUMANS: Human[] = [
     },
   },
   {
+    id: 2,
     name: 'Jane Doe',
     age: 25,
     occupation: 'Doctor',
@@ -24,6 +26,7 @@ export const HUMANS: Human[] = [
     },
   },
   {
+    id: 3,
     name: 'Bob Smith',
     age: 40,
     occupation: 'Lawyer',
@@ -35,6 +38,7 @@ export const HUMANS: Human[] = [
     },
   },
   {
+    id: 4,
     name: 'Alice Johnson',
     age: 28,
     occupation: 'Teacher',
@@ -46,6 +50,7 @@ export const HUMANS: Human[] = [
     },
   },
   {
+    id: 5,
     name: 'Mike Brown',
     age: 35,
     occupation: 'Engineer',
@@ -57,6 +62,7 @@ export const HUMANS: Human[] = [
     },
   },
   {
+    id: 6,
     name: 'Emily Davis',
     age: 22,
     occupation: 'Student',
@@ -68,6 +74,7 @@ export const HUMANS: Human[] = [
     },
   },
   {
+    id: 7,
     name: 'Sarah Lee',
     age: 38,
     occupation: 'Manager',
@@ -79,6 +86,7 @@ export const HUMANS: Human[] = [
     },
   },
   {
+    id: 8,
     name: 'Kevin White',
     age: 42,
     occupation: 'Consultant',
@@ -90,6 +98,7 @@ export const HUMANS: Human[] = [
     },
   },
   {
+    id: 9,
     name: 'Lisa Nguyen',
     age: 29,
     occupation: 'Designer',
@@ -101,6 +110,7 @@ export const HUMANS: Human[] = [
     },
   },
   {
+    id: 10,
     name: 'David Kim',
     age: 36,
     occupation: 'Scientist',
@@ -112,6 +122,7 @@ export const HUMANS: Human[] = [
     },
   },
   {
+    id: 11,
     name: 'Rachel Patel',
     age: 24,
     occupation: 'Artist',
@@ -123,6 +134,7 @@ export const HUMANS: Human[] = [
     },
   },
   {
+    id: 12,
     name: 'Michael Martin',
     age: 39,
     occupation: 'Writer',
@@ -134,6 +146,7 @@ export const HUMANS: Human[] = [
     },
   },
   {
+    id: 13,
     name: 'Jessica Hall',
     age: 27,
     occupation: 'Nurse',
@@ -145,6 +158,7 @@ export const HUMANS: Human[] = [
     },
   },
   {
+    id: 14,
     name: 'Christopher Lewis',
     age: 41,
     occupation: 'Architect',
@@ -156,6 +170,7 @@ export const HUMANS: Human[] = [
     },
   },
   {
+    id: 15,
     name: 'Heather Brooks',
     age: 26,
     occupation: 'Musician',

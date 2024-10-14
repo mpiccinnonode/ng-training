@@ -1,4 +1,5 @@
 export interface Beast {
+  id: number;
   name: string;
   species: string;
   habitat: string;
