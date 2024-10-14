@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 
 export const routes: Routes = [
   {
@@ -6,4 +6,9 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./trial/trial.routes').then((m) => m.TRIAL_ROUTES),
   },
+  {
+    path: '',
+    redirectTo: 'trial',
+    pathMatch: 'full',
+  }
 ];

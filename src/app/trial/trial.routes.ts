@@ -3,6 +3,8 @@ import { Routes } from '@angular/router';
 export const TRIAL_ROUTES: Routes = [
   {
     path: '',
+    loadComponent: () =>
+      import('./main/main.component').then((m) => m.MainComponent),
     children: [
       {
         path: 'humans',
