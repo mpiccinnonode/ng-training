@@ -1,3 +1,25 @@
 <div class="container-fluid">
-
+  <div class="row">
+    <h2>Umani</h2>
+  </div>
+  <div class="mt-3">
+    <table class="w-100">
+      <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Età</th>
+        <th>Occupazione</th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (human of humans; track human.id) {
+          <tr>
+            <td>{{ human.name }}</td>
+            <td>{{ human.age }}</td>
+            <td>{{ human.occupation }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
 </div>
