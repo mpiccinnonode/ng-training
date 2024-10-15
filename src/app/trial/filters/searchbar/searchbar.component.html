@@ -1,0 +1,7 @@
+<input
+  type="text"
+  placeholder="Cerca per nome"
+  (input)="onSearchInput($event)"
+  [value]="searchName"
+/>
+<button type="button" (click)="submit.emit(searchName)">Search</button>
