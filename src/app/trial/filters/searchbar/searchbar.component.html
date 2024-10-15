@@ -1,7 +1,11 @@
-<input
-  type="text"
-  placeholder="Cerca per nome"
-  (input)="onSearchInput($event)"
-  [value]="searchName"
-/>
-<button type="button" (click)="submit.emit(searchName)">Search</button>
+<div class="d-flex gap-2">
+  <input
+    type="text"
+    placeholder="Cerca per nome"
+    (input)="onSearchInput($event)"
+    [value]="searchName"
+  />
+  <button class="rounded-2" type="button" (click)="submit.emit(searchName)">
+    Cerca
+  </button>
+</div>

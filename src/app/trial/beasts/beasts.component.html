@@ -3,7 +3,16 @@
     <h2>Bestie</h2>
   </div>
 
-  <app-searchbar (submit)="onSearchBeastName($event)"></app-searchbar>
+  <div class="d-flex gap-2">
+    <app-searchbar (submit)="onSearchBeastName($event)"></app-searchbar>
+    <app-filter-advance
+      [options]="beastSpeciesOptions"
+      (submit)="onSelectOptionsBeastSpecies($event)"
+    ></app-filter-advance>
+    <button class="rounded-2" type="button" (click)="resetOccupations()">
+      Reset
+    </button>
+  </div>
 
   <div class="mt-3">
     <table class="w-100">

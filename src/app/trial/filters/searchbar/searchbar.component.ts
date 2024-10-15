@@ -17,7 +17,7 @@ export class SearchbarComponent {
     //Mi vado a prendere quello che digito nell'input
     const inputElement = event.target as HTMLInputElement;
     console.log(inputElement.value);
-    //Assegnazione del valore digitato 
+    //Assegnazione del valore digitato
     this.searchName = inputElement.value;
   }
 }

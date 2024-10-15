@@ -1,1 +1,5 @@
-<p>filter-advance works!</p>
+<select (change)="onOptionSelect($event)">
+  @for (option of options; track option) {
+    <option [value]="option">{{ option }}</option>
+  }
+</select>
