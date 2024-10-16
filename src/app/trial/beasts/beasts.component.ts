@@ -19,6 +19,8 @@ export class BeastsComponent implements OnInit {
   optionsbeastSpecies: string[] = [];
   optionsRangeSize = ['<5', '5-10', '10-15', '>15'];
 
+  private _isAscendening: boolean = true;
+
   constructor(
     private beastsService: BeastsService,
     private destroyRef: DestroyRef,
@@ -51,6 +53,17 @@ export class BeastsComponent implements OnInit {
 
   resetBeast(): void {
     this.filteredBeasts = this.beasts;
+  }
+
+  sortByWeight(): void {
+    this.filteredBeasts = this.beasts.sort((a, b) => {
+      if (this._isAscendening) {
+        return a.size.weight - b.size.weight;
+      } else {
+        return b.size.weight - a.size.weight;
+      }
+    });
+    this._isAscendening = !this._isAscendening;
   }
 
   private _isWithinSizeRange(length: number, range: string): boolean {

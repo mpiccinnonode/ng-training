@@ -16,8 +16,10 @@ export class HumansComponent implements OnInit {
   humans: Human[] = [];
   filteredHumans: Human[] = [];
   humanOccupation: string[] = [];
+  humanAges: number[] = []; 
   optionsAgeRanges = ['<20', '20-30', '30-40', '>40'];
 
+  private _isAscendending: boolean = true;
 
   constructor(
     private humansService: HumansService,
@@ -50,6 +52,19 @@ export class HumansComponent implements OnInit {
   resetFilter(): void {
     this.filteredHumans = this.humans;
   }
+
+  sortByAge() {
+    this.filteredHumans = this.humans.sort((a, b) => {
+      if (this._isAscendending) {
+        return a.age - b.age;
+      } else {
+        return b.age - a.age;
+      }
+    });
+
+    this._isAscendending = !this._isAscendending;
+  }
+
 
   private _isWithinAgeRange(age: number, range: string): boolean {
     switch (range) {
