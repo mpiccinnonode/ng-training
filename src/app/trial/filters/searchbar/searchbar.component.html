@@ -2,8 +2,7 @@
   <input
     type="text"
     placeholder="Cerca per nome"
-    (input)="onSearchInput($event)"
-    [value]="searchName"
+    [(ngModel)]="searchName" 
   />
   <button class="rounded-2" type="button" (click)="submit.emit(searchName)">
     Cerca

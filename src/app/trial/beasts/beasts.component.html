@@ -45,4 +45,27 @@
       </tbody>
     </table>
   </div>
+
+  <div class="mt-3">
+    <div class="row">
+      @for (groupBeastDiet of groupedBeastsByDiet; track $index) {
+        <div class="col-md-4">
+          <table class="w-100">
+            <thead>
+              <tr>
+                <th>{{ groupBeastDiet.diet }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (name of groupBeastDiet.names; track $index) {
+                <tr>
+                  <td>{{ name }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    </div>
+  </div>
 </div>

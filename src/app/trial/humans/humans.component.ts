@@ -31,6 +31,7 @@ export class HumansComponent implements OnInit {
     this._fetchData();
     this._getHumanOccupation();
     this._getAddressHumanOrderAlphabeticalState();
+    
   }
 
   onSearchHumanName(searchName: string): void {

@@ -86,7 +86,7 @@ export class BeastsComponent implements OnInit {
   dietBeast(): DietBeast[] {
     let diets: string[] = this.beasts.map((item) => item.diet);
     const dietType = new Set(diets);
-    let groupedBeastsByDiet: DietBeast[] = [];
+    this.groupedBeastsByDiet = [];
 
     dietType.forEach((item) => {
       let beasts = this.beasts.filter((beast) => beast.diet === item);
@@ -94,13 +94,12 @@ export class BeastsComponent implements OnInit {
         diet: item,
         names: beasts.map((beast) => beast.name),
       };
-      groupedBeastsByDiet.push(res);
+      this.groupedBeastsByDiet.push(res);
     });
-    console.log(groupedBeastsByDiet);
-    
-    return groupedBeastsByDiet;
+    console.log(this.groupedBeastsByDiet);
+    console.table(this.groupedBeastsByDiet);
+    return this.groupedBeastsByDiet;
   }
-
 
   private _getSpecies(): void {
     this.optionsbeastSpecies = this.beasts.map((items) => items.species);

@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-filter-advance',
   standalone: true,
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './filter-advance.component.html',
   styleUrl: './filter-advance.component.scss',
 })
@@ -11,21 +12,8 @@ export class FilterAdvanceComponent {
   @Output() submit = new EventEmitter<string>();
   @Output() submitRange = new EventEmitter<string>();
   @Input() options: string[] = [];
-  @Input() rangeOptions: (string | number | boolean)[] = [];
+  @Input() rangeOptions: string[] = [];
 
   selectedOption: string = '';
   selectedRange: string = '';
-
-  onOptionSelect(event: Event): void {
-    const selectElement = event.target as HTMLSelectElement;
-    this.selectedOption = selectElement.value;
-    this.submit.emit(this.selectedOption)
-  }
-
-  onRangeSelect(event: Event): void {
-    const selectElement = event.target as HTMLSelectElement;
-    this.selectedRange = selectElement.value;
-    this.submitRange.emit(this.selectedRange);
-  }
-
 }
