@@ -1,6 +1,6 @@
 import { Component, DestroyRef, OnInit } from '@angular/core';
 import { HumansService } from '../../../services/humans.service';
-import { Human } from '../../../models/human.model';
+import { Address, Human } from '../../../models/human.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SearchbarComponent } from '../filters/searchbar/searchbar.component';
 import { FilterAdvanceComponent } from '../filters/filter-advance/filter-advance.component';
@@ -15,8 +15,9 @@ import { FilterAdvanceComponent } from '../filters/filter-advance/filter-advance
 export class HumansComponent implements OnInit {
   humans: Human[] = [];
   filteredHumans: Human[] = [];
+  addressList: Address[] = [];
   humanOccupation: string[] = [];
-  humanAges: number[] = []; 
+  humanAges: number[] = [];
   optionsAgeRanges = ['<20', '20-30', '30-40', '>40'];
 
   private _isAscendending: boolean = true;
@@ -29,6 +30,7 @@ export class HumansComponent implements OnInit {
   ngOnInit(): void {
     this._fetchData();
     this._getHumanOccupation();
+    this._getAddressHumanOrderAlphabeticalState();
   }
 
   onSearchHumanName(searchName: string): void {
@@ -45,7 +47,7 @@ export class HumansComponent implements OnInit {
 
   onSelectOptionsAgeRenge(ageRange: string): void {
     this.filteredHumans = this.humans.filter((human) =>
-      this._isWithinAgeRange(human.age, ageRange)
+      this._isWithinAgeRange(human.age, ageRange),
     );
   }
 
@@ -65,6 +67,10 @@ export class HumansComponent implements OnInit {
     this._isAscendending = !this._isAscendending;
   }
 
+  private _getAddressHumanOrderAlphabeticalState(): void {
+    this.addressList = this.humans.map((items) => items.address);
+    this.addressList.sort((a, b) => a.state.localeCompare(b.state));
+  }
 
   private _isWithinAgeRange(age: number, range: string): boolean {
     switch (range) {
@@ -85,6 +91,8 @@ export class HumansComponent implements OnInit {
   private _getHumanOccupation(): void {
     this.humanOccupation = this.humans.map((item) => item.occupation);
   }
+
+
 
   private _fetchData(): void {
     this.humansService

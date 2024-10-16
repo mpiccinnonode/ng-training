@@ -6,7 +6,7 @@ export interface Human {
   address: Address;
 }
 
-interface Address {
+export interface Address {
   street: string;
   city: string;
   state: string;

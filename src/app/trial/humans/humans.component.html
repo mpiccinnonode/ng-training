@@ -39,4 +39,31 @@
       </tbody>
     </table>
   </div>
+
+  <div class="row mt-4">
+    <h2>Indirizzi</h2>
+  </div>
+
+  <div class="mt-3">
+    <table class="w-100">
+      <thead>
+        <tr>
+          <th>Via</th>
+          <th>Città</th>
+          <th>Stato</th>
+          <th>CAP</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (address of addressList; track address) {
+          <tr>
+            <td>{{ address.street }}</td>
+            <td>{{ address.city }}</td>
+            <td>{{ address.state }}</td>
+            <td>{{ address.zip }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
 </div>
