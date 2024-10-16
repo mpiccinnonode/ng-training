@@ -16,9 +16,8 @@ export class BeastsComponent implements OnInit {
   beasts: Beast[] = [];
   //nuova variabile dove salvo gli elementi filtrati
   filteredBeasts: Beast[] = [];
-  searchName: string = '';
-  beastSpeciesOptions: string[] = [];
-  beastSpeciesSelected: string = '';
+  optionsbeastSpecies: string[] = [];
+  optionsRangeSize = ['<5', '5-10', '10-15', '>15'];
 
   constructor(
     private beastsService: BeastsService,
@@ -28,32 +27,49 @@ export class BeastsComponent implements OnInit {
   ngOnInit(): void {
     this._fetchData();
     this._getSpecies();
-    console.log(this.beastSpeciesOptions);
   }
 
-  //riassegno il valore della variabile in base al valore passato
   onSearchBeastName(searchName: string): void {
-    this.searchName = searchName;
     //assegno all'array tutte le bestie che
     // includono nel nome la stringa che ho digitato
     this.filteredBeasts = this.beasts.filter((beast) =>
-      beast.name.toLowerCase().includes(this.searchName.toLowerCase()),
+      beast.name.toLowerCase().includes(searchName.toLowerCase()),
     );
   }
 
-  //Stesso approccio utilizzato per la searchbar
-  onSelectOptionsBeastSpecies(beastSpeciesSelected: string){
-    this.beastSpeciesSelected = beastSpeciesSelected;
-    this.filteredBeasts = this.beasts;
-    this.filteredBeasts = this.filteredBeasts.filter(items => items.species.includes(beastSpeciesSelected))
+  onSelectOptionsBeastSpecies(beastSpeciesSelected: string): void {
+    this.filteredBeasts = this.beasts.filter((items) =>
+      items.species.includes(beastSpeciesSelected),
+    );
   }
 
-  resetOccupations(){
+  onSelectOptionsRangeLength(lengthRange: string): void {
+    this.filteredBeasts = this.beasts.filter((beast) =>
+      this._isWithinSizeRange(beast.size.length, lengthRange),
+    );
+  }
+
+  resetBeast(): void {
     this.filteredBeasts = this.beasts;
   }
 
-  private _getSpecies() {
-    this.beastSpeciesOptions = this.beasts.map((items) => items.species);
+  private _isWithinSizeRange(length: number, range: string): boolean {
+    switch (range) {
+      case '<5':
+        return length < 5;
+      case '5-10':
+        return length >= 5 && length <= 10;
+      case '10-15':
+        return length >= 10 && length <= 15;
+      case '>15':
+        return length > 15;
+      default:
+        return false;
+    }
+  }
+
+  private _getSpecies(): void {
+    this.optionsbeastSpecies = this.beasts.map((items) => items.species);
   }
 
   private _fetchData(): void {

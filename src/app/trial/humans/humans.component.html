@@ -7,7 +7,9 @@
     <app-searchbar (submit)="onSearchHumanName($event)"></app-searchbar>
     <app-filter-advance
       [options]="humanOccupation"
+      [rangeOptions]="optionsAgeRanges"
       (submit)="onSelectOptionsOccupations($event)"
+      (submitRange)="onSelectOptionsAgeRenge($event)"
     ></app-filter-advance>
     <button class="rounded-2" type="button" (click)="resetFilter()">
       Reset

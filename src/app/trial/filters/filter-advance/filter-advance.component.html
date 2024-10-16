@@ -3,3 +3,8 @@
     <option [value]="option">{{ option }}</option>
   }
 </select>
+<select (change)="onRangeSelect($event)">
+  @for (optionRange of rangeOptions; track optionRange) {
+    <option [value]="optionRange">{{ optionRange }}</option>
+  }
+</select>

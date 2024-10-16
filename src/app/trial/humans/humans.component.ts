@@ -2,8 +2,8 @@ import { Component, DestroyRef, OnInit } from '@angular/core';
 import { HumansService } from '../../../services/humans.service';
 import { Human } from '../../../models/human.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { SearchbarComponent } from "../filters/searchbar/searchbar.component";
-import { FilterAdvanceComponent } from "../filters/filter-advance/filter-advance.component";
+import { SearchbarComponent } from '../filters/searchbar/searchbar.component';
+import { FilterAdvanceComponent } from '../filters/filter-advance/filter-advance.component';
 
 @Component({
   selector: 'app-humans',
@@ -16,8 +16,8 @@ export class HumansComponent implements OnInit {
   humans: Human[] = [];
   filteredHumans: Human[] = [];
   humanOccupation: string[] = [];
-  searchName: string = '';
-  optionsOccupation: string='';
+  optionsAgeRanges = ['<20', '20-30', '30-40', '>40'];
+
 
   constructor(
     private humansService: HumansService,
@@ -27,30 +27,48 @@ export class HumansComponent implements OnInit {
   ngOnInit(): void {
     this._fetchData();
     this._getHumanOccupation();
-    console.log(this.humanOccupation);
-    
   }
 
   onSearchHumanName(searchName: string): void {
-    this.searchName = searchName;
-    this.filteredHumans = this.humans.filter(human => 
-      human.name.toLowerCase().includes(this.searchName.toLowerCase())
+    this.filteredHumans = this.humans.filter((human) =>
+      human.name.toLowerCase().includes(searchName.toLowerCase()),
     );
   }
 
-  onSelectOptionsOccupations(optionsOccupation: string){
-    this.optionsOccupation = optionsOccupation;
-    this.filteredHumans = this.humans;
-    this.filteredHumans = this.filteredHumans.filter(human => human.occupation.includes(optionsOccupation))
+  onSelectOptionsOccupations(optionsOccupation: string) {
+    this.filteredHumans = this.humans.filter((human) =>
+      human.occupation.includes(optionsOccupation),
+    );
   }
 
-  resetFilter(){
+  onSelectOptionsAgeRenge(ageRange: string): void {
+    this.filteredHumans = this.humans.filter((human) =>
+      this._isWithinAgeRange(human.age, ageRange)
+    );
+  }
+
+  resetFilter(): void {
     this.filteredHumans = this.humans;
+  }
+
+  private _isWithinAgeRange(age: number, range: string): boolean {
+    switch (range) {
+      case '<20':
+        return age < 20;
+      case '20-30':
+        return age >= 20 && age <= 30;
+      case '30-40':
+        return age >= 30 && age <= 40;
+      case '>40':
+        return age > 40;
+      default:
+        return false;
+    }
   }
 
   //Recupero tutte le occupazioni e le salvo nella variabile
   private _getHumanOccupation(): void {
-    this.humanOccupation = this.humans.map((item) => item.occupation)
+    this.humanOccupation = this.humans.map((item) => item.occupation);
   }
 
   private _fetchData(): void {
@@ -60,7 +78,6 @@ export class HumansComponent implements OnInit {
       .subscribe((res) => {
         this.humans = res;
         this.filteredHumans = res;
-        this._getHumanOccupation();
       });
   }
 }

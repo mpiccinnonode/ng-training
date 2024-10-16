@@ -6,10 +6,12 @@
   <div class="d-flex gap-2">
     <app-searchbar (submit)="onSearchBeastName($event)"></app-searchbar>
     <app-filter-advance
-      [options]="beastSpeciesOptions"
+      [options]="optionsbeastSpecies"
+      [rangeOptions]="optionsRangeSize"
       (submit)="onSelectOptionsBeastSpecies($event)"
+      (submitRange)="onSelectOptionsRangeLength($event)"
     ></app-filter-advance>
-    <button class="rounded-2" type="button" (click)="resetOccupations()">
+    <button class="rounded-2" type="button" (click)="resetBeast()">
       Reset
     </button>
   </div>
@@ -22,6 +24,7 @@
           <th>Specie</th>
           <th>Habitat</th>
           <th>Dieta</th>
+          <th>Taglia</th>
         </tr>
       </thead>
       <tbody>
@@ -31,6 +34,7 @@
             <td>{{ beast.species }}</td>
             <td>{{ beast.habitat }}</td>
             <td>{{ beast.diet }}</td>
+            <td>{{ beast.size.length }}</td>
           </tr>
         }
       </tbody>

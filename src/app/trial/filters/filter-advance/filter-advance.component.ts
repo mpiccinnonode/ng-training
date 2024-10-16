@@ -9,11 +9,23 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class FilterAdvanceComponent {
   @Output() submit = new EventEmitter<string>();
+  @Output() submitRange = new EventEmitter<string>();
   @Input() options: string[] = [];
+  @Input() rangeOptions: (string | number | boolean)[] = [];
+
+  selectedOption: string = '';
+  selectedRange: string = '';
 
   onOptionSelect(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
-    console.log(selectElement.value);
-    this.submit.emit(selectElement.value);
+    this.selectedOption = selectElement.value;
+    this.submit.emit(this.selectedOption)
   }
+
+  onRangeSelect(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    this.selectedRange = selectElement.value;
+    this.submitRange.emit(this.selectedRange);
+  }
+
 }
