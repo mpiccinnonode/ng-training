@@ -1,6 +1,6 @@
 import { Component, DestroyRef, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Beast } from '../../../models/beast.model';
+import { Beast, DietBeast } from '../../../models/beast.model';
 import { BeastsService } from '../../../services/beasts.service';
 import { SearchbarComponent } from '../filters/searchbar/searchbar.component';
 import { FilterAdvanceComponent } from '../filters/filter-advance/filter-advance.component';
@@ -18,6 +18,7 @@ export class BeastsComponent implements OnInit {
   filteredBeasts: Beast[] = [];
   optionsbeastSpecies: string[] = [];
   optionsRangeSize = ['<5', '5-10', '10-15', '>15'];
+  groupedBeastsByDiet: DietBeast[] = [];
 
   private _isAscendening: boolean = true;
 
@@ -29,6 +30,7 @@ export class BeastsComponent implements OnInit {
   ngOnInit(): void {
     this._fetchData();
     this._getSpecies();
+    this.dietBeast();
   }
 
   onSearchBeastName(searchName: string): void {
@@ -80,6 +82,25 @@ export class BeastsComponent implements OnInit {
         return false;
     }
   }
+
+  dietBeast(): DietBeast[] {
+    let diets: string[] = this.beasts.map((item) => item.diet);
+    const dietType = new Set(diets);
+    let groupedBeastsByDiet: DietBeast[] = [];
+
+    dietType.forEach((item) => {
+      let beasts = this.beasts.filter((beast) => beast.diet === item);
+      let res: DietBeast = {
+        diet: item,
+        names: beasts.map((beast) => beast.name),
+      };
+      groupedBeastsByDiet.push(res);
+    });
+    console.log(groupedBeastsByDiet);
+    
+    return groupedBeastsByDiet;
+  }
+
 
   private _getSpecies(): void {
     this.optionsbeastSpecies = this.beasts.map((items) => items.species);

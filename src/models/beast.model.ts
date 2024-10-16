@@ -11,3 +11,8 @@ interface Size {
   length: number;
   weight: number;
 }
+
+export interface DietBeast {
+  names: string[];
+  diet: string;
+}
