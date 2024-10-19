@@ -21,6 +21,7 @@ export class HumansComponent implements OnInit {
   optionsAgeRanges = ['<20', '20-30', '30-40', '>40'];
 
   private _isAscendending: boolean = true;
+  private _originalAge: number[] = [];
 
   constructor(
     private humansService: HumansService,
@@ -31,7 +32,6 @@ export class HumansComponent implements OnInit {
     this._fetchData();
     this._getHumanOccupation();
     this._getAddressHumanOrderAlphabeticalState();
-    
   }
 
   onSearchHumanName(searchName: string): void {
@@ -56,7 +56,7 @@ export class HumansComponent implements OnInit {
     this.filteredHumans = this.humans;
   }
 
-  sortByAge() {
+  sortByAge(): void {
     this.filteredHumans = this.humans.sort((a, b) => {
       if (this._isAscendending) {
         return a.age - b.age;
@@ -66,6 +66,20 @@ export class HumansComponent implements OnInit {
     });
 
     this._isAscendending = !this._isAscendending;
+  }
+
+  addFiveAge(human: Human): void {
+    human.age + 5 > 100 ? human.age = 100 : human.age +=5;
+  }
+
+  remuveFiveAge(human: Human): void {
+    human.age -5 < 0 ? human.age = 0 : human.age -= 5;
+  }
+
+  resetAllAge(): void {
+    this.humans.forEach((human, index) => {
+      human.age = this._originalAge[index];
+    });
   }
 
   private _getAddressHumanOrderAlphabeticalState(): void {
@@ -93,14 +107,13 @@ export class HumansComponent implements OnInit {
     this.humanOccupation = this.humans.map((item) => item.occupation);
   }
 
-
-
   private _fetchData(): void {
     this.humansService
       .getAll()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((res) => {
         this.humans = res;
+        this._originalAge = this.humans.map((item) => item.age);
         this.filteredHumans = res;
       });
   }

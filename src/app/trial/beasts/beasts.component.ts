@@ -101,6 +101,16 @@ export class BeastsComponent implements OnInit {
     return this.groupedBeastsByDiet;
   }
 
+  addSize(beast: Beast): void {
+    beast.size.length +=5;
+    beast.size.weight +=5;
+  }
+
+  reduceSize(beast: Beast): void {
+    beast.size.length -5 < 1 ? beast.size.length = 1 : beast.size.length -=5;
+    beast.size.weight -5 < 10 ? beast.size.weight = 10 : beast.size.weight -=5;
+  }
+
   private _getSpecies(): void {
     this.optionsbeastSpecies = this.beasts.map((items) => items.species);
   }

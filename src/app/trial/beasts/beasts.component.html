@@ -40,6 +40,17 @@
             <td>{{ beast.diet }}</td>
             <td>{{ beast.size.length }}</td>
             <td>{{ beast.size.weight }}</td>
+            <td>
+              <button class="rounded-2 m-2" (click)="addSize(beast)">
+                Ingrandisci
+              </button>
+              <button class="rounded-2" (click)="reduceSize(beast)">
+                Rimpisciolisci
+              </button>
+            </td>
+            <td>
+              
+            </td>
           </tr>
         }
       </tbody>
