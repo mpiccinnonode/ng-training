@@ -41,11 +41,14 @@
             <td>{{ beast.size.length }}</td>
             <td>{{ beast.size.weight }}</td>
             <td>
-              <button class="rounded-2 m-2" (click)="addSize(beast)">
+              <button class="rounded-2 m-1" (click)="addSize(beast)">
                 Ingrandisci
               </button>
-              <button class="rounded-2" (click)="reduceSize(beast)">
+              <button class="rounded-2 m-1" (click)="reduceSize(beast)">
                 Rimpisciolisci
+              </button>
+              <button class="rounded-2 m-1" (click)="delete(beast)">
+                Elimina
               </button>
             </td>
             <td>

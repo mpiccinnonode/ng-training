@@ -82,6 +82,12 @@ export class HumansComponent implements OnInit {
     });
   }
 
+  delete(human: Human): void {
+    this.humansService.delete(human.id).subscribe(() => {
+      this._fetchData();
+    });
+  }
+
   private _getAddressHumanOrderAlphabeticalState(): void {
     this.addressList = this.humans.map((items) => items.address);
     this.addressList.sort((a, b) => a.state.localeCompare(b.state));

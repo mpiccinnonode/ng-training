@@ -17,6 +17,11 @@ export const TRIAL_ROUTES: Routes = [
           import('./beasts/beasts.component').then((m) => m.BeastsComponent),
       },
       {
+        path: 'riders',
+        loadComponent: () =>
+          import('./riders/riders.component').then((m) => m.RidersComponent),
+      },
+      {
         path: '',
         redirectTo: 'humans',
         pathMatch: 'full',

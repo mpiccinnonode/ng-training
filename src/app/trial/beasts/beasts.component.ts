@@ -35,7 +35,7 @@ export class BeastsComponent implements OnInit {
 
   onSearchBeastName(searchName: string): void {
     //assegno all'array tutte le bestie che
-    // includono nel nome la stringa che ho digitato
+    //includono nel nome la stringa che ho digitato
     this.filteredBeasts = this.beasts.filter((beast) =>
       beast.name.toLowerCase().includes(searchName.toLowerCase()),
     );
@@ -110,6 +110,12 @@ export class BeastsComponent implements OnInit {
     beast.size.length -5 < 1 ? beast.size.length = 1 : beast.size.length -=5;
     beast.size.weight -5 < 10 ? beast.size.weight = 10 : beast.size.weight -=5;
   }
+
+  delete(beast: Beast): void {
+    this.beastsService.delete(beast.id);
+    this._fetchData();
+  }
+
 
   private _getSpecies(): void {
     this.optionsbeastSpecies = this.beasts.map((items) => items.species);

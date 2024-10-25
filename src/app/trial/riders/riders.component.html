@@ -1,0 +1,47 @@
+<div>
+  <label>Seleziona Umano:</label>
+  <select [(ngModel)]="selectedHuman">
+    <option [ngValue]="null">Seleziona un umano</option>
+    @for (human of humans; track human.id) {
+      <option [ngValue]="human">
+        {{ human.name }}
+      </option>
+    }
+  </select>
+
+  <label for="beast">Seleziona Bestia:</label>
+  <select [(ngModel)]="selectedBeast">
+    <option [ngValue]="null">Seleziona una bestia</option>
+    @for (beast of beasts; track beast.id) {
+      <option [ngValue]="beast">
+        {{ beast.name }}
+      </option>
+    }
+  </select>
+
+  <button
+    class="rounded-2"
+    type="button"
+    (click)="addRider()"
+    [disabled]="!selectedHuman || !selectedBeast"
+  >
+    Add Rider
+  </button>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Human</th>
+      <th>Beast</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (rider of riders; track rider.human.id) {
+      <tr>
+        <td>{{ rider.human.name }}</td>
+        <td>{{ rider.beast.name }}</td>
+      </tr>
+    }
+  </tbody>
+</table>

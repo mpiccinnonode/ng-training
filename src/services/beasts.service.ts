@@ -12,4 +12,10 @@ export class BeastsService {
   getAll(): Observable<Beast[]> {
     return this._beastsSubject.asObservable();
   }
+
+  delete(beastId: number): void {
+    const currentBeasts = this._beastsSubject.getValue();
+    const updatedBeasts = currentBeasts.filter((beast) => beast.id !== beastId);
+    this._beastsSubject.next(updatedBeasts);
+  }
 }

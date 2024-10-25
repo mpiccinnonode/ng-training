@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { HUMANS } from '../constants/humans.const';
 import { Human } from '../models/human.model';
 
@@ -11,5 +11,14 @@ export class HumansService {
 
   getAll(): Observable<Human[]> {
     return this._humansSubject.asObservable();
+  }
+
+  delete(humandId: number): Observable<Human[]> {
+    const currentHumans = this._humansSubject.getValue();
+    const updatedHumans = currentHumans.filter(
+      (human) => human.id !== humandId,
+    );
+    this._humansSubject.next(updatedHumans);
+    return of();
   }
 }
