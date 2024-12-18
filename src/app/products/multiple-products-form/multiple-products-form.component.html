@@ -1,4 +1,5 @@
 <form [formGroup]="form">
+  <app-person-form [form]="customerDataSubForm"></app-person-form>
   <input type="text" formControlName="customerName" placeholder="Customer name">
   <input type="number" formControlName="customerAge" placeholder="Customer age">
   <div formArrayName="productNames">
@@ -13,3 +14,5 @@
   <button (click)="addProductName()">Add Product</button>
   <button [disabled]="form.invalid" (click)="submitForm()">Submit</button>
 </form>
+<br>
+<app-person-form [form]="personForm"></app-person-form>
