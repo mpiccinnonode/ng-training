@@ -8,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ProductsForm } from './models/products-form.model';
 
 @Component({
   selector: 'app-multiple-products-form',
@@ -27,11 +28,11 @@ export class MultipleProductsFormComponent implements OnInit {
     private destroyRef: DestroyRef,
   ) {}
 
-  get form(): FormGroup {
+  get form(): FormGroup<ProductsForm> {
     return this._form;
   }
 
-  set form(value: FormGroup) {
+  set form(value: FormGroup<ProductsForm>) {
     this._form = value;
   }
 
@@ -48,10 +49,10 @@ export class MultipleProductsFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.form = this.fb.group({
-      customerName: this.fb.control('', Validators.required),
-      customerAge: this.fb.control({ value: 0, disabled: true }), // attivo solo se customerName valorizzato
-      productNames: this.fb.array([]),
+    this.form = this.fb.group<ProductsForm>({
+      customerName: this.fb.control<string>('', Validators.required),
+      customerAge: this.fb.control<number>({ value: 0, disabled: true }), // attivo solo se customerName valorizzato
+      productNames: this.fb.array<FormControl<string | null>>([]),
     });
     this._manageDependency();
   }
