@@ -1,0 +1,8 @@
+<br>
+@for (customer of customers(); track customer.fiscalCode) {
+  <app-customer-details [customer]="customer"></app-customer-details>
+}
+<br>
+<span>{{ itemsCounterDescription() }}</span>
+<br><br>
+<button (click)="addCustomer()">Add</button>

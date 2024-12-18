@@ -1,6 +1,13 @@
-import {Routes} from "@angular/router";
 
-export const PRODUCTS_ROUTES: Routes = [{
-  path: '',
-  loadComponent: () => import('../products/products-list/products-list.component').then((m) => m.ProductsListComponent),
-}]
+import { Routes } from '@angular/router';
+
+export const PRODUCTS_ROUTES: Routes = [
+  {
+    path: '',
+    loadComponent: () =>
+      import(
+        '../products/multiple-products-form/multiple-products-form.component'
+      ).then((m) => m.MultipleProductsFormComponent),
+  },
+];
+
